@@ -2,27 +2,27 @@
 @property --color-night {
   syntax: "<color>";
   inherits: true;
-  initial-value: #07061a;
+  initial-value: #100037;
 }
 @property --color-midnight {
   syntax: "<color>";
   inherits: true;
-  initial-value: #110e30;
+  initial-value: #2b0062;
 }
 @property --color-indigo {
   syntax: "<color>";
   inherits: true;
-  initial-value: #241c55;
+  initial-value: #57009b;
 }
 @property --color-violet {
   syntax: "<color>";
   inherits: true;
-  initial-value: #43378a;
+  initial-value: #9900d1;
 }
 @property --color-lavender {
   syntax: "<color>";
   inherits: true;
-  initial-value: #7465bd;
+  initial-value: #ff12f7;
 }
 @property --color-text {
   syntax: "<color>";
@@ -39,11 +39,11 @@
     --color-lavender 0.8s ease,
     --color-text 0.8s ease;
 
-  --color-night: #07061a;
-  --color-midnight: #110e30;
-  --color-indigo: #241c55;
-  --color-violet: #43378a;
-  --color-lavender: #7465bd;
+  --color-night: #100037;
+  --color-midnight: #2b0062;
+  --color-indigo: #57009b;
+  --color-violet: #9900d1;
+  --color-lavender: #ff12f7;
   --color-text: #ffffff;
 
   color-scheme: dark;
@@ -53,11 +53,11 @@
 
 /* Set on :root rather than body so the html background (visible on overscroll) follows too. */
 :root:has(> body.wide-gamut) {
-  --color-night: oklch(0.17 0.14 285);
-  --color-midnight: oklch(0.26 0.24 292);
-  --color-indigo: oklch(0.38 0.31 300);
-  --color-violet: oklch(0.52 0.34 312);
-  --color-lavender: oklch(0.7 0.33 330);
+  --color-night: oklch(0.17 0.101 285);
+  --color-midnight: oklch(0.26 0.149 292);
+  --color-indigo: oklch(0.38 0.211 300);
+  --color-violet: oklch(0.52 0.276 312);
+  --color-lavender: oklch(0.7 0.349 330);
   --color-text: oklch(0.97 0.06 320);
 }
 
@@ -187,4 +187,20 @@ main {
   max-width: 60rem;
   margin-inline: auto;
   padding: 2rem 1rem;
+}
+
+/* Text color is deliberately not var(--color-lavender): it stays at the sRGB value so it can be compared against the oklch palette behind it. */
+.srgb-sample {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  background-color: var(--color-lavender);
+  font-size: clamp(6rem, 25vw, 20rem);
+  font-weight: 900;
+  line-height: 0.8;
+  color: #ff12f7;
+  pointer-events: none;
 }
