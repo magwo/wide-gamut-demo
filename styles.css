@@ -1,37 +1,50 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 :root {
-  color-scheme: light dark;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
+  --color-night: #07061a;
+  --color-midnight: #110e30;
+  --color-indigo: #241c55;
+  --color-violet: #43378a;
+  --color-lavender: #7465bd;
+  --color-text: #ffffff;
+
+  color-scheme: dark;
+  color: var(--color-text);
+  background-color: var(--color-night);
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
+  color: var(--color-text);
+  background:
+    linear-gradient(
+      115deg,
+      transparent 30%,
+      color-mix(in oklab, var(--color-lavender) 8%, transparent) 30% 42%,
+      transparent 42%
+    ),
+    linear-gradient(
+      65deg,
+      transparent 55%,
+      color-mix(in oklab, var(--color-lavender) 6%, transparent) 55% 70%,
+      transparent 70%
+    ),
+    radial-gradient(
+      120% 60% at 50% 100%,
+      var(--color-lavender) 0%,
+      color-mix(in oklab, var(--color-violet) 60%, transparent) 40%,
+      transparent 75%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-night) 0%,
+      var(--color-midnight) 30%,
+      var(--color-indigo) 60%,
+      var(--color-violet) 100%
+    );
+  background-attachment: fixed;
 }
 
 main {
   max-width: 60rem;
   margin-inline: auto;
   padding: 2rem 1rem;
-}
-
-img,
-svg,
-video,
-canvas {
-  display: block;
-  max-width: 100%;
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.2;
-  text-wrap: balance;
 }

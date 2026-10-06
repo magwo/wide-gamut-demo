@@ -1,0 +1,86 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Medium-latin.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Avanza Slab";
+  src: url("Roboto-Avanza-Slab-Bold-latin.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto Avanza Slab", "Roboto", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+/* Inherit so links match the size of the heading or paragraph they sit in. */
+a {
+  font-size: inherit;
+  color: inherit;
+}
