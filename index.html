@@ -8,9 +8,30 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <header class="site-header">
+      <button
+        type="button"
+        class="gamut-switch"
+        role="switch"
+        aria-checked="false"
+        id="gamut-switch"
+      >
+        <span class="gamut-switch__track" aria-hidden="true">
+          <span class="gamut-switch__thumb"></span>
+        </span>
+        <span class="gamut-switch__label">Wide gamut</span>
+      </button>
+    </header>
     <main>
-      <h1>Wide Gamut Demo</h1>
-      <p>A starting point for a static demo page.</p>
+      <p>Wide Gamut Demo</p>
+      <h1>Avanza</h1>
     </main>
+    <script>
+      const gamutSwitch = document.getElementById("gamut-switch");
+      gamutSwitch.addEventListener("click", () => {
+        const on = document.body.classList.toggle("wide-gamut");
+        gamutSwitch.setAttribute("aria-checked", String(on));
+      });
+    </script>
   </body>
 </html>

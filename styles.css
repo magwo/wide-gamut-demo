@@ -1,4 +1,44 @@
+/* Registered so the palette swap can transition instead of snapping. */
+@property --color-night {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #07061a;
+}
+@property --color-midnight {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #110e30;
+}
+@property --color-indigo {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #241c55;
+}
+@property --color-violet {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #43378a;
+}
+@property --color-lavender {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #7465bd;
+}
+@property --color-text {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+
 :root {
+  transition:
+    --color-night 0.8s ease,
+    --color-midnight 0.8s ease,
+    --color-indigo 0.8s ease,
+    --color-violet 0.8s ease,
+    --color-lavender 0.8s ease,
+    --color-text 0.8s ease;
+
   --color-night: #07061a;
   --color-midnight: #110e30;
   --color-indigo: #241c55;
@@ -9,6 +49,16 @@
   color-scheme: dark;
   color: var(--color-text);
   background-color: var(--color-night);
+}
+
+/* Set on :root rather than body so the html background (visible on overscroll) follows too. */
+:root:has(> body.wide-gamut) {
+  --color-night: oklch(0.17 0.14 285);
+  --color-midnight: oklch(0.26 0.24 292);
+  --color-indigo: oklch(0.38 0.31 300);
+  --color-violet: oklch(0.52 0.34 312);
+  --color-lavender: oklch(0.7 0.33 330);
+  --color-text: oklch(0.97 0.06 320);
 }
 
 body {
@@ -41,6 +91,96 @@ body {
       var(--color-violet) 100%
     );
   background-attachment: fixed;
+}
+
+.site-header {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem 0;
+}
+
+.gamut-switch {
+  --track-width: 5rem;
+  --track-height: 2.75rem;
+  --thumb-inset: 0.3rem;
+  --thumb-size: calc(var(--track-height) - 2 * var(--thumb-inset));
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.gamut-switch__track {
+  position: relative;
+  flex: none;
+  width: var(--track-width);
+  height: var(--track-height);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-midnight) 70%, transparent);
+  box-shadow:
+    inset 0 0 0 2px color-mix(in oklab, var(--color-lavender) 50%, transparent),
+    inset 0 2px 6px rgb(0 0 0 / 0.4);
+  transition:
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.gamut-switch__thumb {
+  position: absolute;
+  top: var(--thumb-inset);
+  left: var(--thumb-inset);
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border-radius: 50%;
+  background: var(--color-text);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.4);
+  transition:
+    translate 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale 0.2s ease,
+    background-color 0.4s ease;
+}
+
+.gamut-switch:active .gamut-switch__thumb {
+  scale: 1.12 0.9;
+}
+
+.gamut-switch[aria-checked="true"] .gamut-switch__track {
+  background: linear-gradient(
+    90deg,
+    var(--color-violet),
+    var(--color-lavender)
+  );
+  box-shadow:
+    inset 0 0 0 2px color-mix(in oklab, var(--color-text) 40%, transparent),
+    0 0 1.25rem color-mix(in oklab, var(--color-lavender) 70%, transparent);
+}
+
+.gamut-switch[aria-checked="true"] .gamut-switch__thumb {
+  translate: calc(var(--track-width) - var(--thumb-size) - 2 * var(--thumb-inset))
+    0;
+}
+
+.gamut-switch:focus-visible {
+  outline: none;
+}
+
+.gamut-switch:focus-visible .gamut-switch__track {
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  .gamut-switch__track,
+  .gamut-switch__thumb {
+    transition: none;
+  }
 }
 
 main {
