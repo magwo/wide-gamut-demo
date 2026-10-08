@@ -1,0 +1,203 @@
+/* Webview mode makes the body transparent so the native app can paint behind it. */
+body.is-transparent {
+    background: var(--mint-color-background-primary);
+}
+
+/* styles.css rewrites the PWA's mobile width breakpoints to container queries on
+   proto-viewport and vw units to --proto-vw, so both follow the body width. */
+:root {
+    --proto-frame-width: 390px;
+    --proto-vw: 1vw;
+}
+
+body {
+    container: proto-viewport / inline-size;
+}
+
+/* The snapshot is mobile only (< 768px). Wider screens show it as a centered phone-width
+   column; the transform makes body the containing block for position: fixed descendants. */
+@media (min-width: 768px) {
+    :root {
+        --proto-vw: calc(var(--proto-frame-width) / 100);
+        background: #000;
+    }
+
+    body {
+        max-width: var(--proto-frame-width);
+        margin-inline: auto;
+        transform: translateZ(0);
+        box-shadow: 0 0 0 1px var(--mint-color-stroke-primary);
+    }
+}
+
+.proto-toast {
+    position: fixed;
+    right: 24px;
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+    z-index: 2147483647;
+    max-width: calc(100% - 32px);
+    padding: 10px 16px;
+    border: 1px solid rgb(0 0 0 / 8%);
+    border-radius: 12px;
+    background: #fff;
+    color: #111;
+    font: 500 14px/20px Roboto, Arial, sans-serif;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 50%);
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+        opacity 150ms ease,
+        transform 150ms ease;
+    pointer-events: none;
+}
+
+.proto-toast.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.proto-colors-frame {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483645;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.proto-colors-frame[hidden] {
+    display: none;
+}
+
+html.proto-colors-active,
+html.proto-colors-active body {
+    overflow: hidden;
+}
+
+.proto-dock {
+    position: fixed;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    right: calc(24px + env(safe-area-inset-right, 0px));
+    z-index: 2147483646;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.proto-panel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid var(--mint-color-stroke-primary);
+    border-radius: 8px;
+    background: var(--mint-color-background-primary);
+    color: var(--mint-color-content-primary);
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.proto-panel label {
+    cursor: pointer;
+}
+
+.proto-select {
+    height: 32px;
+    padding: 0 28px 0 8px;
+    border: 1px solid var(--mint-color-stroke-high-contrast);
+    border-radius: 8px;
+    background: var(--mint-color-container-primary)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5l4 4 4-4' fill='none' stroke='%230D1112' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        no-repeat right 7px center / 12px 12px;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    appearance: none;
+}
+
+body[data-theme='dark'] .proto-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5l4 4 4-4' fill='none' stroke='%23f9fbfb' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Mint binary switch (medium), copied without its Angular scoping attributes. */
+.proto-switch {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    width: 45px;
+    min-width: 45px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--mint-color-stroke-high-contrast);
+    border-radius: 24px;
+    background-color: var(--mint-color-container-secondary);
+    cursor: pointer;
+    outline-offset: 1px;
+    transition:
+        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.proto-switch .indicator {
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+    border: 1px solid var(--mint-color-stroke-high-contrast);
+    border-radius: 24px;
+    background-color: var(--mint-color-persistent-white);
+    transform: translate(-1px);
+    transition:
+        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.proto-switch[aria-checked='true'] {
+    border-color: var(--mint-color-stroke-active);
+    background-color: var(--mint-color-stroke-active);
+}
+
+.proto-switch[aria-checked='true'] .indicator {
+    border-color: var(--mint-color-container-primary);
+    transform: translate(20px);
+}
+
+@media screen and (forced-colors: active) {
+    .proto-switch[aria-checked='true'] .indicator {
+        background-color: buttontext;
+    }
+}
+
+.proto-shake {
+    animation: proto-shake 400ms ease;
+}
+
+@keyframes proto-shake {
+    0%,
+    100% {
+        translate: 0;
+    }
+    20%,
+    60% {
+        translate: -4px;
+    }
+    40%,
+    80% {
+        translate: 4px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .proto-shake {
+        animation: none;
+    }
+
+    .proto-toast {
+        transition: none;
+    }
+}

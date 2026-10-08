@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colors v3</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    /* sRGB: original hex colors expressed in OKLCH */
+    :root {
+      --red: oklch(62.63% 0.2567 29.26);
+      --blue: oklch(45.07% 0.3123 264.05);
+      --magenta: oklch(70.19% 0.3221 328.36);
+      --green: oklch(86.67% 0.2943 142.46);
+      --cyan: oklch(90.55% 0.1544 194.77);
+      --yellow: oklch(96.80% 0.2110 109.77);
+    }
+
+    /* P3: the P3 primaries and secondaries themselves */
+    :root[data-gamut="p3"] {
+      --red: oklch(64.86% 0.2995 28.95);
+      --blue: oklch(46.64% 0.3233 264.07);
+      --magenta: oklch(72.50% 0.3603 331.45);
+      --green: oklch(84.88% 0.3684 145.65);
+      --cyan: oklch(89.29% 0.2056 193.18);
+      --yellow: oklch(96.48% 0.2449 110.23);
+    }
+
+    /* Frame 30454 */
+    .frame {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .frame > div {
+      position: absolute;
+    }
+
+    /* Frame 30446 */
+    .frame-30446 {
+      left: 0%;
+      right: 50%;
+      top: 0%;
+      bottom: 66.67%;
+      background: var(--red);
+    }
+
+    /* Frame 30450 */
+    .frame-30450 {
+      left: 0%;
+      right: 50%;
+      top: 33.33%;
+      bottom: 33.33%;
+      background: var(--blue);
+    }
+
+    /* Frame 30452 */
+    .frame-30452 {
+      left: 0%;
+      right: 50%;
+      top: 66.67%;
+      bottom: 0%;
+      background: var(--magenta);
+    }
+
+    /* Frame 30449 */
+    .frame-30449 {
+      left: 50%;
+      right: 0%;
+      top: 0%;
+      bottom: 66.67%;
+      background: var(--green);
+    }
+
+    /* Frame 30451 */
+    .frame-30451 {
+      left: 50%;
+      right: 0%;
+      top: 33.33%;
+      bottom: 33.33%;
+      background: var(--cyan);
+    }
+
+    /* Frame 30453 */
+    .frame-30453 {
+      left: 50%;
+      right: 0%;
+      top: 66.67%;
+      bottom: 0%;
+      background: var(--yellow);
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="frame-30446"></div>
+    <div class="frame-30450"></div>
+    <div class="frame-30452"></div>
+    <div class="frame-30449"></div>
+    <div class="frame-30451"></div>
+    <div class="frame-30453"></div>
+  </div>
+</body>
+</html>
